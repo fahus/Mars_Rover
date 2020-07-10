@@ -1,6 +1,6 @@
 module MarsRover 
-open System  
 
+open System
 
 //Domain Modeling 
 
@@ -65,46 +65,22 @@ let listOfCommands:Command list = [L;M;L;M;L;M;L;M;M ]
 
 let myRoverPosition  =  { Location = {X = 1; Y = 2} ; Direction = North}
 
-// 3 3 E
 
-//MMRMMRMRRM
 
-let listOfRovers = [(listOfCommands, myRoverPosition)]
+let listOfRovers = [
+    (listOfCommands, myRoverPosition)
+    ([M;M;R;M;M;R;M;R;R;M],{ Location = {X = 3; Y = 3} ; Direction = East} )
+    ]
 
-// type Rover = 
-//  { Commands: Command List
-//    RoverPosition: RoverPosition}
 
 let folder (roverPosition:RoverPosition) (command: Command):RoverPosition= 
     interpretCommand command roverPosition 
 
-let state :RoverPosition = myRoverPosition
 
-let list :Command list = listOfCommands
+let foldRover roverPosition commands = 
+    List.fold folder roverPosition commands
 
-let result = List.fold folder state list
+let result = 
+    listOfRovers
+    |> List.map( fun (lcmds, myRP) -> foldRover myRP lcmds )
 
-
-
-(*
-    intermediate rover positions:
-  init - 1 2 N
-     L - 1 2 W
-     M - 0 2 W
-     L - 0 2 S
-     M - 0 1 S 
-     L - 0 1 W
-     M - 1 1 W
-     L - 1 1 N
-     M - 1 2 N
-     M - 1 3 N 
-*)
-
-(*
-List.fold: 
-   folder: 'State -> 'T -> 'State ->
-   state : 'State   ->
-   list  : list<'T> 
-        -> 'State
-        
-*)

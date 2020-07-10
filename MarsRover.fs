@@ -2,7 +2,6 @@ module MarsRover
 
 open System
 
-//Domain Modeling 
 
 type Direction = 
 | North
@@ -26,12 +25,12 @@ type Command =
 | R
 
 
-let step direction (location:Location)  =
+let step direction (location:Location) (upperRight:Location)  =
     match direction with
-    | North -> {location with Y = location.Y + 1 }
-    | East -> {location with X = location.X + 1 }
-    | South -> {location with Y = location.Y - 1 }
-    | West -> {location with X = location.X - 1 }
+    | North -> {location with Y = if location.Y = upperRight.Y then location.Y else location.Y + 1 }
+    | East -> { location with X = if location.X = upperRight.X then location.X else location.X + 1 }
+    | South -> { location with Y = if location.Y = upperRight.Y then location.Y else location.Y - 1 }
+    | West -> {location with X = if location.X = upperRight.X then location.X else location.Y - 1 }
 
 
 
@@ -53,13 +52,13 @@ let leftOf direction =
 let turnLeft rover = {rover with Direction=leftOf rover.Direction}
 let turnRight rover = {rover with Direction=rightOf rover.Direction} 
 
-let moveForward rover = {rover with Location= step rover.Direction rover.Location}
+let moveForward (upperRight:Location) rover = {rover with Location= step rover.Direction rover.Location upperRight }
 
-let interpretCommand command = 
+let interpretCommand (upperRight:Location) command  = 
     match command with 
     | L -> turnLeft
     | R -> turnRight
-    | M -> moveForward
+    | M -> moveForward upperRight
 
 let listOfCommands:Command list = [L;M;L;M;L;M;L;M;M ]
 
@@ -70,17 +69,21 @@ let myRoverPosition  =  { Location = {X = 1; Y = 2} ; Direction = North}
 let listOfRovers = [
     (listOfCommands, myRoverPosition)
     ([M;M;R;M;M;R;M;R;R;M],{ Location = {X = 3; Y = 3} ; Direction = East} )
-    ]
+    ([M;M;M;M;M;M],{ Location = {X = 2; Y = 4} ; Direction = North} )
+    ([M;M;M;M;M;M],{ Location = {X = 2; Y = 4} ; Direction = South} )
+    ] 
 
 
-let folder (roverPosition:RoverPosition) (command: Command):RoverPosition= 
-    interpretCommand command roverPosition 
+let folder (upperRight:Location)(roverPosition:RoverPosition) (command: Command):RoverPosition = 
+    interpretCommand upperRight command roverPosition 
 
 
-let foldRover roverPosition commands = 
-    List.fold folder roverPosition commands
+let foldRover (upperRight:Location)  roverPosition commands = 
+    let partialAppFolder = folder upperRight
+    List.fold partialAppFolder roverPosition commands 
 
-let result = 
+let firstInput = {X = 5; Y = 5}
+let result  = 
     listOfRovers
-    |> List.map( fun (lcmds, myRP) -> foldRover myRP lcmds )
+    |> List.map( fun (lcmds, myRP) -> foldRover firstInput myRP lcmds )
 

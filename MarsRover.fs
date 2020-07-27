@@ -24,14 +24,15 @@ type Command =
 | L
 | R
 
+let lowerLeft = { X = 0 ; Y = 0}
 
 let step direction (location:Location) (upperRight:Location)  =
     match direction with
-    | North -> {location with Y = if location.Y = upperRight.Y then location.Y else location.Y + 1 }
-    | East -> { location with X = if location.X = upperRight.X then location.X else location.X + 1 }
-    | South -> { location with Y = if location.Y = upperRight.Y then location.Y else location.Y - 1 }
-    | West -> {location with X = if location.X = upperRight.X then location.X else location.Y - 1 }
-
+    | North -> {location with Y = if location.Y = upperRight.Y then upperRight.Y else location.Y + 1 }
+    | East -> { location with X = if location.X = upperRight.X then upperRight.X else location.X + 1 }
+    | South -> { location with Y = if location.Y = lowerLeft.Y then lowerLeft.Y else location.Y - 1 }
+    | West -> {location with X = if location.X = lowerLeft.X then lowerLeft.X else location.X- 1 }
+ 
 
 
 let rightOf direction =
@@ -60,29 +61,26 @@ let interpretCommand (upperRight:Location) command  =
     | R -> turnRight
     | M -> moveForward upperRight
 
-let listOfCommands:Command list = [L;M;L;M;L;M;L;M;M ]
-
-let myRoverPosition  =  { Location = {X = 1; Y = 2} ; Direction = North}
-
-
-
-let listOfRovers = [
-    (listOfCommands, myRoverPosition)
-    ([M;M;R;M;M;R;M;R;R;M],{ Location = {X = 3; Y = 3} ; Direction = East} )
-    ([M;M;M;M;M;M],{ Location = {X = 2; Y = 4} ; Direction = North} )
-    ([M;M;M;M;M;M],{ Location = {X = 2; Y = 4} ; Direction = South} )
-    ] 
-
-
-let folder (upperRight:Location)(roverPosition:RoverPosition) (command: Command):RoverPosition = 
+let folder (upperRight:Location) (roverPosition:RoverPosition) (command: Command):RoverPosition = 
     interpretCommand upperRight command roverPosition 
 
-
-let foldRover (upperRight:Location)  roverPosition commands = 
+let foldRover (upperRight:Location) roverPosition commands = 
     let partialAppFolder = folder upperRight
     List.fold partialAppFolder roverPosition commands 
 
+
+
+
+
 let firstInput = {X = 5; Y = 5}
+
+let listOfRovers = [
+    ([L;M;L;M;L;M;L;M;M],  { Location = {X = 1; Y = 2} ; Direction = North} )
+    ([M;M;R;M;M;R;M;R;R;M],{ Location = {X = 3; Y = 3} ; Direction = East}  )
+    ([M;M;M;M;M;M],        { Location = {X = 2; Y = 4} ; Direction = South} )
+    ] 
+
+
 let result  = 
     listOfRovers
     |> List.map( fun (lcmds, myRP) -> foldRover firstInput myRP lcmds )

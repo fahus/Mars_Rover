@@ -2,6 +2,7 @@
 open MarsRover
 open System
 
+
 let convertToInt (s:string) =
     match Int32.TryParse s with 
     | true, i -> Some i 
@@ -15,7 +16,7 @@ let createLocation (input:string) :Location =
         | _,_ -> failwith "could not convert string to int"
     |_-> failwith "must provide two coordinates"
 
-// convert string to direction 1 2 N
+
 let convertInputToDirection (d:string)  =
     match d with
     | "N" -> Some North
@@ -37,6 +38,47 @@ let constructRoverPosition (input:string)   =
 
 
 
+let matchStringToCommand (command:char)  =
+    match command with 
+    |'M' -> Some M
+    |'L' -> Some L 
+    |'R' -> Some R
+    | _-> None 
+    
+ 
+let inputToCommandList (command:string) :Command list   =
+    Seq.toList command 
+    |> List.map
+        (fun s ->  
+        match matchStringToCommand s with 
+               | Some command -> command
+               | None -> failwith "enter valid command")
+
+
+type RoverInput = 
+| Input of Command List * RoverPosition
+| Stop
+
+let getRoverInput() :RoverInput = 
+    printfn "Please enter a Rover, if not Stop"
+    let input = Console.ReadLine()
+    if input = "Stop" then Stop
+    else 
+        let roverPosition = constructRoverPosition input
+        let input = Console.ReadLine()
+        let commandList = inputToCommandList input 
+        Input (commandList, roverPosition)
+
+
+
+let rec createListOfRovers existingRovers  =
+    let roverInput = getRoverInput()
+    match roverInput with 
+        | Stop -> existingRovers
+        | Input (commandList, roverPosition) ->
+            createListOfRovers ((commandList, roverPosition) :: existingRovers)
+            
+  
 
 
 [<EntryPoint>]
@@ -45,10 +87,15 @@ let main argv =
     try 
         let input = Console.ReadLine()
         let upperRight = createLocation input 
-        let input = Console.ReadLine()
-        let roverPosition = constructRoverPosition input    
+        let listOfRovers = createListOfRovers [] 
+       
         printfn "%A" upperRight
-        printfn "%A" roverPosition
+        let input = { ListOfRovers = listOfRovers ; UpperRight = upperRight  }
+        let result = deployRovers input
+
+        printfn "%A" result 
+
+
         0 // return an integer exit code
     with e ->  
         eprintfn "%s" e.Message 

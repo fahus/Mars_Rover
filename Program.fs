@@ -77,8 +77,27 @@ let rec createListOfRovers existingRovers  =
         | Stop -> existingRovers
         | Input (commandList, roverPosition) ->
             createListOfRovers ((commandList, roverPosition) :: existingRovers)
-            
+    |> List.rev
+
   
+//[(North, { X = 1  Y = 3 }); (East, { X = 5 Y = 1 })] 1 2 N  5 1 E 
+
+let getRoverPositionString (input: RoverPosition) =
+    let directionToString (direction: Direction) =
+        match direction with
+        | North -> "N" 
+        | South -> "S"
+        | East -> "E"
+        | West -> "W"
+    let locationToString (location: Location) = 
+        sprintf "%i %i" location.X location.Y 
+    let directionString = directionToString input.Direction
+    let locationString = locationToString input.Location 
+    sprintf "%s %s"  locationString directionString
+
+let roverPositionListToStringList (input: RoverPosition list) :unit = 
+    input |> List.map(fun c -> getRoverPositionString c )
+          |> List.iter (fun c -> printfn "%s" c )
 
 
 [<EntryPoint>]
@@ -88,17 +107,12 @@ let main argv =
         let input = Console.ReadLine()
         let upperRight = createLocation input 
         let listOfRovers = createListOfRovers [] 
-       
-        printfn "%A" upperRight
+        printfn "%A" listOfRovers
         let input = { ListOfRovers = listOfRovers ; UpperRight = upperRight  }
-        let result = deployRovers input
-
-        printfn "%A" result 
-
+        let result = deployRovers input 
+        roverPositionListToStringList result
 
         0 // return an integer exit code
     with e ->  
         eprintfn "%s" e.Message 
         -1
-
-

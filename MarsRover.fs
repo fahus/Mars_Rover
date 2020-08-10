@@ -87,6 +87,16 @@ let deployRovers (input: DeployRoversInput) =
     |> List.map (fun (lcmds, myRP) -> foldRover input.UpperRight myRP lcmds)
 
 
+
+
+
+
+
+
+
+
+
+
 // let firstInput = {X = 5; Y = 5}
 
 // let listOfRovers = [

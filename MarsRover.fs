@@ -85,30 +85,3 @@ let foldRover (upperRight: Location) roverPosition commands =
 let deployRovers (input: DeployRoversInput) =
     input.ListOfRovers
     |> List.map (fun (lcmds, myRP) -> foldRover input.UpperRight myRP lcmds)
-
-
-
-
-
-
-
-
-
-
-
-
-// let firstInput = {X = 5; Y = 5}
-
-// let listOfRovers = [
-//     ([L;M;L;M;L;M;L;M;M],  { Location = {X = 1; Y = 2} ; Direction = North} )
-//     ([M;M;R;M;M;R;M;R;R;M],{ Location = {X = 3; Y = 3} ; Direction = East}  )
-//     ([M;M;M;M;M;M],        { Location = {X = 2; Y = 4} ; Direction = South} )
-//     ]
-
-// let listOfRovers = [
-//     ([M;L;M],   { Location = {X = 2; Y = 4} ; Direction = South} )
-//     ]
-
-// let result  =
-//     listOfRovers
-//     |> List.map( fun (lcmds, myRP) -> foldRover firstInput myRP lcmds )

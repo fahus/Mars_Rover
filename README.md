@@ -45,3 +45,13 @@ Expected Output:
 1 3 N
 
 5 1 E
+
+
+(*
+-look for file called input.txt 
+- input file same as input on README
+- turn file into input record type - turn list of strings into record type
+- Parse line by line
+- DeployRovers
+- Save response to output.txt  
+*)

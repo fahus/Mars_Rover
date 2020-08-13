@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Y5aRFX5CySUBWlY5LkxB98zmel0pf0+ruDcONPyrbEtrmSqW+svIR4GcbdjyCtDeoe3itY07DsBS8qGb2arzgQ==",
+  "success": true,
+  "projectFilePath": "/Users/fhussein/Projects/MarsRover/MarsRover.FileSystem/MarsRover.FileSystem.fsproj",
+  "expectedPackageFiles": [
+    "/Users/fhussein/.nuget/packages/fsharp.core/4.7.1/fsharp.core.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

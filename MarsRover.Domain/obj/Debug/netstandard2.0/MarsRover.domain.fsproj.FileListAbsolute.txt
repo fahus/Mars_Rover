@@ -1,0 +1,8 @@
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/bin/Debug/netstandard2.0/MarsRover.domain.deps.json
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/bin/Debug/netstandard2.0/MarsRover.domain.dll
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/bin/Debug/netstandard2.0/MarsRover.domain.pdb
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/obj/Debug/netstandard2.0/MarsRover.domain.fsprojAssemblyReference.cache
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/obj/Debug/netstandard2.0/MarsRover.domain.AssemblyInfoInputs.cache
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/obj/Debug/netstandard2.0/MarsRover.domain.AssemblyInfo.fs
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/obj/Debug/netstandard2.0/MarsRover.domain.dll
+/Users/fhussein/Projects/MarsRover/MarsRover.domain/obj/Debug/netstandard2.0/MarsRover.domain.pdb

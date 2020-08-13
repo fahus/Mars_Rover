@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "uVwCWKiU/BrV0I1DdFGGtJBEWnLe9Ljlx4VgFogHeCyWW2ryp5MHyNDfjcJYJBf1RA20MNQu46GZau4IfZMpjg==",
+  "success": true,
+  "projectFilePath": "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj",
+  "expectedPackageFiles": [
+    "/Users/fhussein/.nuget/packages/fsharp.core/4.7.1/fsharp.core.4.7.1.nupkg.sha512",
+    "/Users/fhussein/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/fhussein/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

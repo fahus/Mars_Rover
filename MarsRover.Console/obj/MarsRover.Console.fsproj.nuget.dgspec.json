@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/fhussein/Projects/MarsRover/MarsRover.Console/MarsRover.Console.fsproj": {}
+  },
+  "projects": {
+    "/Users/fhussein/Projects/MarsRover/MarsRover.Console/MarsRover.Console.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/fhussein/Projects/MarsRover/MarsRover.Console/MarsRover.Console.fsproj",
+        "projectName": "MarsRover.Console",
+        "projectPath": "/Users/fhussein/Projects/MarsRover/MarsRover.Console/MarsRover.Console.fsproj",
+        "packagesPath": "/Users/fhussein/.nuget/packages/",
+        "outputPath": "/Users/fhussein/Projects/MarsRover/MarsRover.Console/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/fhussein/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj": {
+                "projectPath": "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[4.7.1, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj",
+        "projectName": "MarsRover.Domain",
+        "projectPath": "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/MarsRover.Domain.fsproj",
+        "packagesPath": "/Users/fhussein/.nuget/packages/",
+        "outputPath": "/Users/fhussein/Projects/MarsRover/MarsRover.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/fhussein/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[4.7.1, )",
+              "generatePathProperty": true
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true,
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

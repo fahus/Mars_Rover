@@ -51,8 +51,6 @@ let stringToCommandList (command:string) :Command list =
         | Some command -> command
         | None -> failwith "Enter valid Command" )
  
-
-
 (*
 5 5 upper right 
 1 2 N rover position rover 1
@@ -66,15 +64,80 @@ MMRRMLM
 *)
 
 
+   
+let removeFirstItem input = 
+        match input |> List.ofArray with 
+        | h::t ->  t
+        | _ -> failwith "Cannot remove first item in list"
+
+let extractRoverFromList (input:string list) = 
+    List.head input
+    |> stringToRoverPosition
+   
+
+let extractCommandFromList (input:string list) =
+    List.head input
+    |> stringToCommandList
+
+let matchPairs (input:string list ) =
+    let outputLength = input.Length/2 
+    let newlist = [1..outputLength] 
+    newlist |> List.map (fun x -> ( (x + x - 2), (x + x) - 1))
+            |> List.map ( fun (x,y) -> stringToRoverPosition input.[x] , stringToCommandList input.[y] )
+            |> List.rev
+       
+
+
+    
+
+
+
+ 
+    
+
+    
+    
+     
+
+
+// [1..11]
+// |>  List.chunkBySize 2
+// // [
+//     // [1; 2];
+//     // [3; 4];
+//     // [5; 6];
+//     // [7; 8];
+//     // [9; 10] 
+//       //[11]
+// // ]
+// |> List.map (fun x -> x.[0], List.tryItem 1 x)
+// //[(1,2); (3, Some 4); (5,6); (7,8); (9,10); (11, None)]
+            
+
+
+
+
+
+   
+
+
 [<EntryPoint>]
 let main argv =
     let input = (System.IO.File.ReadAllLines("/Users/fhussein/Projects/MarsRover/input.txt"))
     // printfn "%A" input
     let upperRight = stringToLocation input.[0]
-    let roverPosition = stringToRoverPosition input.[1]
-    let commandList = stringToCommandList input.[2]
-    let result = {ListOfRovers = [(commandList,roverPosition)]; UpperRight = upperRight} |> deployRovers
+    let result1 = input |> removeFirstItem |> matchPairs
+    let result = {ListOfRovers =  result1; UpperRight = upperRight} |> deployRovers
+    input |> removeFirstItem |> matchPairs |> deployRovers
 
+// [ a; b; c; d; e; f ]
+// [ 1; 2; 3 ]
+// [ (1, 1); (2, 2); (3, 3) ]
+// [ (0, 1); (1, 2); (2, 3) ]
+// [ (0, 1); (2, 3); (4, 5) ]
+
+
+// [ (a, b); (c, d); (e, f) ]
 
 
 

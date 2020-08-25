@@ -1,4 +1,4 @@
-﻿module MarsRover.Domain     
+﻿module MarsRover.Domain
 
 open System
 

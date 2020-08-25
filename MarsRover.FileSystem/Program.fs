@@ -51,17 +51,7 @@ let stringToCommandList (command:string) :Command list =
         | Some command -> command
         | None -> failwith "Enter valid Command" )
  
-(*
-5 5 upper right 
-1 2 N rover position rover 1
-LMLMLMLMM command list  rover 1 
-3 3 E rover position rover 2 
-MMRMMRMRRM command list rover 2
-3 1 W
-MMMRMMMLMMMRMM
-9 2 S
-MMRRMLM
-*)
+
 
 
    
@@ -70,65 +60,47 @@ let removeFirstItem input =
         | h::t ->  t
         | _ -> failwith "Cannot remove first item in list"
 
-let extractRoverFromList (input:string list) = 
-    List.head input
-    |> stringToRoverPosition
-   
 
-let extractCommandFromList (input:string list) =
-    List.head input
-    |> stringToCommandList
 
 let matchPairs (input:string list ) =
     let outputLength = input.Length/2 
-    let newlist = [1..outputLength] 
+    let newlist =  [1..outputLength] 
     newlist |> List.map (fun x -> ( (x + x - 2), (x + x) - 1))
-            |> List.map ( fun (x,y) -> stringToRoverPosition input.[x] , stringToCommandList input.[y] )
-            |> List.rev
-       
+            |> List.map ( fun (x,y) ->   stringToCommandList input.[y], stringToRoverPosition input.[x] )
+            
+ 
+let formatOutput (input: RoverPosition) = 
+    let directionToString (direction: Direction) =
+        match direction with 
+        | North -> "N"
+        | South -> "S"
+        | East -> "E" 
+        | West -> "W"
 
-
-    
-
-
+    let locationToString (location: Location) = sprintf "%i %i" location.X location.Y
+    let directionString = directionToString input.Direction
+    let locationString = locationToString input.Location 
+    sprintf "%s %s" locationString directionString 
 
  
+
+
     
+ 
+        
 
-    
-    
-     
-
-
-// [1..11]
-// |>  List.chunkBySize 2
-// // [
-//     // [1; 2];
-//     // [3; 4];
-//     // [5; 6];
-//     // [7; 8];
-//     // [9; 10] 
-//       //[11]
-// // ]
-// |> List.map (fun x -> x.[0], List.tryItem 1 x)
-// //[(1,2); (3, Some 4); (5,6); (7,8); (9,10); (11, None)]
-            
-
-
-
-
-
-   
-
-
+open System.IO
 [<EntryPoint>]
 let main argv =
-    let input = (System.IO.File.ReadAllLines("/Users/fhussein/Projects/MarsRover/input.txt"))
+    let input = File.ReadAllLines("/Users/fhussein/Projects/MarsRover/input.txt")
     // printfn "%A" input
     let upperRight = stringToLocation input.[0]
-    let result1 = input |> removeFirstItem |> matchPairs
-    let result = {ListOfRovers =  result1; UpperRight = upperRight} |> deployRovers
-    input |> removeFirstItem |> matchPairs |> deployRovers
+    let listOfRovers = input |> removeFirstItem  |> matchPairs 
+    let result =  {ListOfRovers =  listOfRovers; UpperRight = upperRight} 
+                  |> deployRovers 
+                  |> List.map ( fun s -> formatOutput s)
+    File.WriteAllLines("/Users/fhussein/Projects/MarsRover/output.txt",result)
+    
 
 // [ a; b; c; d; e; f ]
 // [ 1; 2; 3 ]
